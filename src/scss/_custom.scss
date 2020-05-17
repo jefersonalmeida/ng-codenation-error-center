@@ -1,0 +1,277 @@
+$color-default: #6d6d6d;
+$color-ng-invalid: #e13131;
+$color-guest-green: #0fa8a2;
+$color-guest-wine: #d8444d;
+$color-guest-wine-hover: #b23843;
+$color-guest-background: #f0f3f5;
+$color-state-active: #4dbd74;
+$color-state-inactive: #dadada;
+
+.main .container-fluid {
+  padding: 0 15px;
+}
+
+.breadcrumb {
+  margin-bottom: 1rem;
+}
+th.sortable {
+  color: #151b1e;
+  cursor: pointer;
+}
+div.dropdown-menu a.dropdown-item {
+  cursor: pointer;
+}
+input,
+.form-control {
+  border-radius: 0 !important;
+  font-weight: bold;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+ul.error-messages {
+  margin: 0;
+  padding: 0;
+}
+
+ul.error-messages {
+  margin: 0;
+  padding: 0;
+}
+.ui-message {
+  margin: 0;
+  display: block;
+  font-size: 12px;
+  border: none;
+  background: none !important;
+  padding: 2px 0 !important;
+}
+
+.ui-messages-error {
+  color: $color-ng-invalid;
+  font-weight: bold;
+}
+
+form .form-group .ng-valid:not(form):not(:read-only),
+form .form-group .ng-valid[required]:not(:read-only),
+form .form-group .ng-valid.required:not(:read-only),
+input.ng-valid {
+  border-bottom: 1px solid #42a948 !important;
+  /*background-color:#e7ffe9 !important;*/
+}
+
+form .form-group .ng-invalid:not(.ng-untouched):not(form) {
+  border-bottom: 1px solid $color-ng-invalid !important;
+  color: $color-ng-invalid !important;
+  /*background-color: #ffaabe !important;*/
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: #e4e7ea;
+  opacity: 1;
+  border-bottom: 1px solid #ccc !important;
+}
+
+.input-group-text {
+  background-color: #e4e5e6;
+  border: 1px solid #e4e5e6;
+  border-radius: 0;
+}
+
+.text-bold {
+  font-weight: bold !important;
+}
+
+.td-actions {
+  min-width: 80px;
+  text-align: center;
+}
+
+.pagination > li > a {
+  cursor: pointer;
+}
+
+.card-footer {
+  overflow: hidden;
+}
+
+.padding-left-30 {
+  padding-left: 30px !important;
+}
+
+.tab-container {
+  & ul.nav-tabs {
+    & .nav-link {
+      padding: 0.5rem 0.3rem;
+    }
+  }
+
+  & .tab-content {
+    & .tab-pane {
+      overflow: hidden;
+    }
+  }
+}
+
+.tab-pdv-movement {
+  & ul.nav-tabs {
+    & .nav-link {
+      padding: 0.5rem 1rem !important;
+    }
+  }
+}
+
+ul.tree, ul.tree ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.tree ul {
+  margin-left: 10px;
+}
+
+ul.tree a {
+  cursor: pointer;
+}
+
+ul.tree li {
+  margin: 0;
+  padding: 0 0 0 7px;
+  line-height: 30px;
+  color: #369;
+  font-weight: bold;
+  border-left: 1px solid #646464;
+  overflow: hidden;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+ul.tree li:last-child {
+  border-left: none;
+}
+
+ul.tree li:before {
+  position: relative;
+  top: 0;
+  height: 1em;
+  width: 12px;
+  color: white;
+  border-bottom: 1px solid rgb(100, 100, 100);
+  content: "";
+  display: inline-block;
+  left: -7px;
+}
+
+ul.tree li:last-child:before {
+  border-left: 1px solid rgb(100, 100, 100);
+}
+
+.card-header .card-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  float: left;
+  padding: 5px 5px;
+  margin: 0 !important;
+  color: #151b1e;
+  text-align: center;
+  background: 0 0;
+  border: 0;
+  border-left: 1px solid #c2cfd6;
+}
+
+.btn-delete-img {
+  width: 100%;
+  margin: 5px 0;
+}
+
+div.brand-card a.link-dash,
+div.brand-card a.link-dash:hover {
+  text-decoration: none !important;
+}
+
+div.brand-card a.link-dash div.text-value {
+  color: #151b1e;
+}
+
+/*
+  Max width before this PARTICULAR table gets nasty
+  This query will take effect for any screen smaller than 760px
+  and also iPads specifically.
+  */
+app-dashboard /*app-dashboard-default,
+app-dashboard-pdv*/
+{
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100vh !important;
+}
+
+.background-custom {
+  background: #fafafa linear-gradient(135deg, #fafafa 22px, rgba(0, 0, 0, .04) 22px, rgba(0, 0, 0, .04) 24px, transparent 24px, transparent 67px, rgba(0, 0, 0, .04) 67px, rgba(0, 0, 0, .04) 69px, transparent 69px) linear-gradient(225deg, #fafafa 22px, rgba(0, 0, 0, .04) 22px, rgba(0, 0, 0, .04) 24px, transparent 24px, transparent 67px, rgba(0, 0, 0, .04) 67px, rgba(0, 0, 0, .04) 69px, transparent 69px) 0 64px;
+  background-size: 64px 128px;
+}
+.modal-xl {
+  width: 95% !important;
+  max-width: 95% !important;
+}
+@media (min-width: 990px) and (max-width: 100px) {
+  ul.tree li {
+    font-size: 10px;
+  }
+}
+/*
+@media only screen and (max-width: 800px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+  table.table,
+  table.table thead,
+  table.table tbody,
+  table.table th,
+  table.table td,
+  table.table tr {
+    display: block !important;
+  }
+  table.table {
+    & thead tr {
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+    }
+    & tbody tr {
+      border-top: 1px solid;
+    }
+    & tbody tr:first-line {
+      border-top: none;
+    }
+    & td {
+      border: none !important;
+      border-bottom: 1px solid #eee !important;
+      position: relative !important;
+      padding-left: 40% !important;
+      white-space: normal !important;
+      text-align: left !important;
+    }
+    & td:before {
+      position: absolute !important;
+      top: 6px !important;
+      left: 6px !important;
+      width: 35% !important;
+      padding-right: 10px !important;
+      white-space: nowrap !important;
+      text-align: left !important;
+      font-weight: bold !important;
+      border-right: 1px dashed !important;
+    }
+    & td:before {
+      content: attr(data-title);
+    }
+  }
+}
+*/

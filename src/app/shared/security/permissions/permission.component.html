@@ -1,0 +1,37 @@
+<div class="animated fadeIn mb-4">
+  <div class="row mb-1">
+    <div class="col-md-4"><h5 class="mt-2">Permissões</h5></div>
+    <div class="col-md-4">
+      <label>
+        <input [formControl]="searchField" class="form-control" placeholder="Buscar" type="text">
+      </label>
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group d-flex justify-content-between float-md-right">
+        <button (click)="openEntityDialog(null)"
+                *ngIf="acl.isAllowed('permissions-create')"
+                class="btn btn-success mt-2 mt-md-0"
+                placement="top"
+                tooltip="Inserir"><i class="fa fa-plus"></i> Novo
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card card-accent-primary"></div>
+  <div class="row">
+    <div class="col-md-12">
+      <div (scrolled)="search(searchQuery?.current_page)" class="table-responsive" infiniteScroll>
+        <app-permission-list
+          (getSortIcon)="getSortIcon($event)"
+          (openDeleteConfirmDialog)="openDeleteConfirmDialog($event)"
+          (openEntityDialog)="openEntityDialog($event)"
+          (sorted)="sorted($event)"
+          [acl]="acl"
+          [entities]="entities$ | async">
+        </app-permission-list>
+        <app-no-data [entities]="entities$ | async" [loading]="loading$ | async" [search]="searchQuery.search"></app-no-data>
+        <app-loading [loading]="loading$ | async"></app-loading>
+      </div>
+    </div>
+  </div>
+</div>

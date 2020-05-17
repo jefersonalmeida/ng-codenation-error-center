@@ -1,0 +1,107 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div *ngIf="!token; else activateTemplate" class="col-md-6 mx-auto">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <form (ngSubmit)="register()" [formGroup]="form" autocomplete="off" novalidate>
+                <h1>Cadastrar</h1>
+                <p class="text-muted">Crie sua conta</p>
+                <div class="row">
+                  <app-template-form class="col-md-12">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input appUpperCase class="form-control" formControlName="name" placeholder="Nome" type="text">
+                    </div>
+                  </app-template-form>
+                  <app-template-form class="col-md-12">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                      </div>
+                      <input appLowerCase class="form-control" formControlName="email" placeholder="Email" type="text">
+                    </div>
+                  </app-template-form>
+                  <app-template-form class="col-md-12">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                      </div>
+                      <input [type]="passwordHide ? 'password' : 'text'"
+                             class="form-control"
+                             formControlName="password"
+                             placeholder="Senha">
+                      <span class="input-group-append">
+                          <button (click)="passwordHide = !passwordHide" class="btn btn-secondary" type="button">
+                            <i class="fa fa-{{passwordHide ? 'eye' : 'eye-slash'}}"></i>
+                          </button>
+                      </span>
+                    </div>
+                  </app-template-form>
+                  <app-template-form class="col-md-12">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                      </div>
+                      <input [type]="passwordHide ? 'password' : 'text'"
+                             class="form-control"
+                             formControlName="password_confirmation"
+                             placeholder="Confirme a senha">
+                      <span class="input-group-append">
+                          <button (click)="passwordHide = !passwordHide"
+                                  class="btn btn-secondary"
+                                  type="button">
+                            <i class="fa fa-{{passwordHide ? 'eye' : 'eye-slash'}}"></i>
+                          </button>
+                        </span>
+                    </div>
+                  </app-template-form>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <button [disabled]="form.invalid"
+                            class="btn btn-block btn-primary px-4"
+                            type="submit">
+                      <i class="mr-2 fa fa-save"></i>Cadastrar
+                    </button>
+                    <button (click)="login()" class="btn btn-block btn-link px-0" type="button">Login</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer p-4">
+              <div class="row">
+                <div class="col-6">
+                  <button class="btn btn-block btn-facebook" type="button"><i class="fa fa-facebook mr-2"></i><span>facebook</span></button>
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-block btn-google-plus" type="button"><i class="fa fa-google mr-2"></i><span>google</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #activateTemplate>
+          <div class="col-md-6 mx-auto">
+            <div class="card mx-4">
+              <div class="card-body p-4">
+                <h1><i class="fa fa-cog fa-spin fa-lg mr-2"></i>Ativando...</h1>
+                <p class="text-muted">Que bom que você confirmou seu email...</p>
+              </div>
+              <div class="card-footer p-4">
+                <div class="row">
+                  <div class="col-12">
+                    <button (click)="login()" class="btn btn-block btn-primary px-0" type="button">Login</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </main>
+</div>

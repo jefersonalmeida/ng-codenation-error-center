@@ -1,0 +1,6 @@
+<div class="btn-group d-flex mb-4" role="group">
+  <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/security/roles']" class="btn btn-primary w-100" placement="top" routerLinkActive="active" tooltip="Grupos"><i class="fa fa-users mr-1"></i><span class="d-none d-sm-inline">Grupos</span></a>
+  <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/security/users']" class="btn btn-primary w-100" placement="top" routerLinkActive="active" tooltip="Usuários"><i class="fa fa-users mr-1"></i><span class="d-none d-sm-inline">Usuários</span></a>
+  <a [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/security/permissions']" class="btn btn-primary w-100" placement="top" routerLinkActive="active" tooltip="Permissões"><i class="fa fa-shield mr-1"></i><span class="d-none d-sm-inline">Permissões</span></a>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,34 @@
+<table *ngIf="roles.length" class="table bg-white table-hover table-outline mb-0">
+  <thead>
+  <tr>
+    <th (click)="eventSorted('name')" class="sortable"><i class="mr-2 {{eventSortIcon('name')}}"></i>ID</th>
+    <th (click)="eventSorted('display_name')" class="sortable"><i class="mr-2 {{eventSortIcon('display_name')}}"></i>Nome</th>
+    <th class="td-actions"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let entity of roles">
+    <td data-title="ID"><strong>{{entity?.name}}</strong></td>
+    <td data-title="Nome">{{entity?.display_name}}</td>
+    <td class="td-actions" data-title="Ações">
+      <div class="btn-group">
+        <button (click)="eventOpenPermissionDialog(entity)"
+                *ngIf="acl.isAllowed('roles-permissions')"
+                class="btn btn-warning"
+                placement="top"
+                tooltip="Permissões"><i class="fa fa-shield"></i></button>
+        <button (click)="eventOpenEntityDialog(entity)"
+                *ngIf="acl.isAllowed('roles-update')"
+                class="btn btn-primary"
+                placement="top"
+                tooltip="Editar"><i class="fa fa-pencil"></i></button>
+        <button (click)="eventOpenDeleteConfirmDialog(entity)"
+                *ngIf="acl.isAllowed('roles-delete')"
+                class="btn btn-danger" placement="top"
+                tooltip="Apagar"><i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

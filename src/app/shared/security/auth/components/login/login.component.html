@@ -1,0 +1,65 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <form (ngSubmit)="login()" [formGroup]="form" autocomplete="off" novalidate>
+                  <h1>Login</h1>
+                  <p class="text-muted">Faça login em sua conta</p>
+                  <div class="row">
+                    <app-template-form class="col-md-12">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">@</span>
+                        </div>
+                        <input appLowerCase class="form-control" formControlName="email" placeholder="Email" type="text">
+                      </div>
+                    </app-template-form>
+                    <app-template-form class="col-md-12">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="icon-lock"></i></span>
+                        </div>
+                        <input [type]="passwordHide ? 'password' : 'text'"
+                               class="form-control"
+                               formControlName="password"
+                               placeholder="Senha">
+                        <span class="input-group-append">
+                          <button (click)="passwordHide = !passwordHide" class="btn btn-secondary" type="button">
+                            <i class="fa fa-{{passwordHide ? 'eye' : 'eye-slash'}}"></i>
+                          </button>
+                        </span>
+                      </div>
+                    </app-template-form>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <button [disabled]="form.invalid" class="btn btn-block btn-primary px-4" type="submit">
+                        <i class="mr-2 fa fa-sign-in"></i>Login
+                      </button>
+                      <button (click)="forgot()" class="btn btn-block btn-link px-0" type="button">Esqueceu a senha?</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+              <div class="card-body text-center">
+                <div>
+                  <h2>Cadastre-se</h2>
+                  <p>Nós somos a maior e mais eficaz solução para emissão, guarda, e integração de documentos
+                    fiscais do Brasil. Reunimos expertise de décadas sobre o assunto e criamos o que há de melhor para
+                    você Contador/Empresa.</p>
+                  <button (click)="register()" class="btn btn-primary active mt-3" type="button">Cadastrar!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
