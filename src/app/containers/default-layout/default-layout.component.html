@@ -1,9 +1,10 @@
 <app-header
   *ngIf="user$ | async as user"
-  [asideMenuToggler]="'lg'"
+  [asideMenuToggler]="false"
+  [mobileAsideMenuToggler]="false"
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'CoreUI Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'Central de Erros'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.png', width: 30, height: 30, alt: 'Central de Erros'}"
   [navbarBrandRouterLink]="['/dashboard']"
   [sidebarToggler]="'lg'">
   <!--<ul class="nav navbar-nav d-md-down-none">
@@ -23,12 +24,12 @@
     </li>
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a (click)="false" aria-expanded="false" aria-haspopup="true" class="nav-link" data-toggle="dropdown" dropdownToggle href="#" role="button">
-        <img *ngIf="user?.img" [src]="user?.img" alt="{{user?.email}}" class="img-avatar"/>
+        <img alt="{{user?.email}}" class="img-avatar" src="assets/img/avatars/user.png"/>
       </a>
       <div *dropdownMenu aria-labelledby="simple-dropdown" class="dropdown-menu dropdown-menu-right">
-        <div class="dropdown-header text-center"><strong>Ajustes</strong></div>
+        <!--<div class="dropdown-header text-center"><strong>Ajustes</strong></div>
         <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Perfil</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Configurações</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Configurações</a>-->
         <a (click)="handleLogout()" class="dropdown-item"><i class="fa fa-lock"></i> Sair</a>
       </div>
     </li>
@@ -44,7 +45,7 @@
       <li class="breadcrumb-menu d-md-down-none">
         <div aria-label="Button group with nested dropdown" class="btn-group" role="group">
           <a [routerLink]="['/dashboard']" class="btn"><i class="icon-graph"></i> &nbsp;Dashboard</a>
-          <a [routerLink]="['/settings']"  class="btn"><i class="icon-settings"></i> &nbsp;Configurações</a>
+          <!--<a [routerLink]="['/settings']"  class="btn"><i class="icon-settings"></i> &nbsp;Configurações</a>-->
         </div>
       </li>
     </cui-breadcrumb>
@@ -52,7 +53,7 @@
       <router-outlet></router-outlet>
     </div>
   </main>
-  <app-aside [display]="false" [fixed]="true">
+  <!--<app-aside [display]="false" [fixed]="true">
     <tabset>
       <tab>
         <ng-template tabHeading><i class="icon-settings mx-2"></i></ng-template>
@@ -133,9 +134,9 @@
         </div>
       </tab>
     </tabset>
-  </app-aside>
+  </app-aside>-->
 </div>
 <app-footer>
-  <span>&copy; 2020 JAS TECH.</span>
+  <span>&copy; 2020 Central de Erros.</span>
   <span class="ml-auto">Desenvolvido por <a href="https://jeferson.net.br">Jeferson</a></span>
 </app-footer>

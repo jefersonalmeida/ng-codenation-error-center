@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Util } from '../utils/util';
+import { validateUUID } from '../utils/util';
 
 @Injectable({
   providedIn: 'root',
@@ -10,12 +10,12 @@ export class UUIDGuard implements CanActivate {
   constructor(private router: Router) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot,): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     if (!route.params.uuid) {
       return of(false);
     }
 
-    const test = Util.validateUUID(route.params.uuid);
+    const test = validateUUID(route.params.uuid);
     if (!test) {
       this.router.navigate(['/dashboard']);
     }

@@ -8,10 +8,10 @@ const initialState: fromFeature.RoleState = {
   loading: false,
   query: {
     search: '',
-    orderBy: 'name',
-    sortedBy: 'asc',
-    current_page: 1,
-    per_page: 2,
+    order: 'name',
+    sort: 'asc',
+    number: 1,
+    size: 2,
   },
 };
 

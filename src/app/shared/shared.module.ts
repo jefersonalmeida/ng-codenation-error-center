@@ -20,12 +20,24 @@ import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { TemplateFormErrorsComponent } from './components/template-form/template-form-errors.component';
 import { TemplateFormComponent } from './components/template-form/template-form.component';
-import { LowercaseDirective } from './directives/lowercase.directive';
-import { UppercaseDirective } from './directives/uppercase.directive';
 import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
-import { NgPipesModule } from './pipes/pipes.module';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { NgPipesModule } from 'ngx-pipes';
+import { PipesModule } from './pipes/pipes.module';
+import { DirectivesModule } from './directives/directives.module';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
+import { UtcDatepickerComponent } from './components/utc-datepicker/utc-datepicker.component';
 
 registerLocaleData(localePTBR);
+defineLocale('pt-br', ptBrLocale);
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+  dropSpecialCharacters: true,
+};
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -35,6 +47,7 @@ const APP_MODULES = {
   importForRoot: [
     AppBreadcrumbModule.forRoot(),
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot({
       preventDuplicates: true,
@@ -42,19 +55,23 @@ const APP_MODULES = {
       closeButton: true,
       progressBar: true,
       progressAnimation: 'decreasing',
+      timeOut: 2000,
     }),
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
     TooltipModule.forRoot(),
+    NgxMaskModule.forRoot(maskConfig),
   ],
   exportFormRoot: [
     AppBreadcrumbModule,
     BsDropdownModule,
+    BsDatepickerModule,
     TabsModule,
     ToastrModule,
     ModalModule,
     TypeaheadModule,
     TooltipModule,
+    NgxMaskModule,
   ],
   defaults: [
     CommonModule,
@@ -67,7 +84,10 @@ const APP_MODULES = {
     PerfectScrollbarModule,
     ChartsModule,
     NgPipesModule,
+    PipesModule,
+    DirectivesModule,
     InfiniteScrollModule,
+    NgSelectModule,
   ],
   components: [
     TemplateFormComponent,
@@ -75,11 +95,8 @@ const APP_MODULES = {
     FullScreenComponent,
     PaginationComponent,
     LoadingComponent,
-    NoDataComponent
-  ],
-  directives: [
-    UppercaseDirective,
-    LowercaseDirective,
+    NoDataComponent,
+    UtcDatepickerComponent,
   ],
   entry: [
     ModalConfirmComponent,
@@ -91,17 +108,15 @@ const APP_MODULES = {
     ...APP_MODULES.importForRoot,
     ...APP_MODULES.defaults,
   ],
+  declarations: [
+    ...APP_MODULES.components,
+    ...APP_MODULES.entry,
+  ],
   exports: [
     ...APP_MODULES.exportFormRoot,
     ...APP_MODULES.defaults,
     ...APP_MODULES.components,
     ...APP_MODULES.entry,
-    ...APP_MODULES.directives,
-  ],
-  declarations: [
-    ...APP_MODULES.components,
-    ...APP_MODULES.entry,
-    ...APP_MODULES.directives,
   ],
   entryComponents: [
     ...APP_MODULES.entry,
@@ -112,10 +127,9 @@ export class SharedModule {
     return {
       ngModule: SharedModule,
       providers: [
-        {provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true},
+        { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
         // {provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG},
-        {provide: LOCALE_ID, useValue: 'pt'},
-        // {provide: LocationStrategy, useClass: PathLocationStrategy},
+        { provide: LOCALE_ID, useValue: 'pt' },
       ],
     };
   }

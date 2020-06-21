@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
 
     this.token = this.activatedRoute.snapshot.params.token;
     if (this.token) {
-      this.store.dispatch(userActions.Activate({payload: this.token}));
+      this.store.dispatch(userActions.Activate({ payload: this.token }));
     }
     this.form = this.fb.group({
         name: this.fb.control(null, [
@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.store.dispatch(userActions.Register({payload: this.form.value}));
+    this.store.dispatch(userActions.Register({ payload: this.form.value }));
   }
 
   public login() {

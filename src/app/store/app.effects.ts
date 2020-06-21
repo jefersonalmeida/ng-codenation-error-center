@@ -27,8 +27,36 @@ export class AppEffects {
       map(action => action.payload),
       exhaustMap((action: LoginDTO) => this.authService.login(action)
         .pipe(
-          map((user: User) => authActions.SetCurrentUser({payload: user})),
+          map((user: User) => authActions.SetCurrentUser({ payload: user })),
           tap(() => this.router.navigate(['/dashboard'])),
+        ),
+      ),
+    ),
+  );
+
+  loginSocial$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(authActions.LoginSocial),
+      map(action => this.authService.loginSocial(action.payload)),
+    ), { dispatch: false },
+  );
+
+  loginSocialFailure$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(authActions.LoginSocialFailure),
+      map(() => this.authService.goToLogin()),
+    ), { dispatch: false },
+  );
+
+  loginSocialToken$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(authActions.LoginSocialToken),
+      map(action => action.payload),
+      exhaustMap(action => this.authService.loginSocialToken(action)
+        .pipe(
+          map((user: User) => authActions.SetCurrentUser({ payload: user })),
+          tap(() => this.router.navigate(['/dashboard'])),
+          catchError(() => of(authActions.LoginSocialFailure())),
         ),
       ),
     ),
@@ -43,7 +71,7 @@ export class AppEffects {
           map(() => this.authService.goToLogin(action.email ? btoa(action.email) : null)),
         ),
       ),
-    ), {dispatch: false},
+    ), { dispatch: false },
   );
 
   activate$ = createEffect(() => this.actions$
@@ -52,7 +80,7 @@ export class AppEffects {
       map(action => action.payload),
       mergeMap((token: string) => this.authService.activate(token)
         .pipe(
-          map((user: User) => authActions.SetCurrentUser({payload: user})),
+          map((user: User) => authActions.SetCurrentUser({ payload: user })),
           tap(() => this.router.navigate(['/dashboard'])),
         ),
       ),
@@ -68,7 +96,7 @@ export class AppEffects {
           map(() => this.authService.goToLogin(action.email ? btoa(action.email) : null)),
         ),
       ),
-    ), {dispatch: false},
+    ), { dispatch: false },
   );
 
   forgotPasswordReset$ = createEffect(() => this.actions$
@@ -80,7 +108,7 @@ export class AppEffects {
           map(() => this.authService.goToLogin(action.email ? btoa(action.email) : null)),
         ),
       ),
-    ), {dispatch: false},
+    ), { dispatch: false },
   );
 
 
@@ -93,7 +121,7 @@ export class AppEffects {
           catchError(() => of(this.authService.goToLogin(action.email))),
         ),
       ),
-    ), {dispatch: false},
+    ), { dispatch: false },
   );
 
   loginRedirect$ = createEffect(() => this.actions$
@@ -101,7 +129,7 @@ export class AppEffects {
       ofType(authActions.LoginRedirect),
       // tap( () => StorageService.clear()),
       map(() => this.authService.goToLogin()),
-    ), {dispatch: false},
+    ), { dispatch: false },
   );
 
   setInitialUser$ = createEffect(() => this.actions$
@@ -109,7 +137,7 @@ export class AppEffects {
       ofType(authActions.SetInitialUser),
       mergeMap(() => this.authService.whoami()
         .pipe(
-          map((user: User) => authActions.SetCurrentUser({payload: user})),
+          map((user: User) => authActions.SetCurrentUser({ payload: user })),
         ),
       ),
     ),

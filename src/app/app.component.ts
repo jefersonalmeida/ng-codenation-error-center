@@ -10,9 +10,8 @@ import * as fromApp from './store';
 declare let gtag: Function;
 
 @Component({
-  // tslint:disable-next-line
-  selector: 'body',
-  template: '<router-outlet></router-outlet>',
+  selector: 'app-root',
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
 
@@ -64,8 +63,11 @@ export class AppComponent implements OnInit {
     ).subscribe((event) => {
       this.title = `${event['title']} ${this.title ? '|' : ''} ${this.title} | Admin`;
       this.titleService.setTitle(this.title);
-      this.metaService.updateTag({name: 'description', content: 'Gestão sobre as movimentações junto ao Gestor Food'});
-      this.metaService.updateTag({name: 'keywords', content: 'Food,Gestor Tech,Angular,Dashboard,Typescript'});
+      this.metaService.updateTag({
+        name: 'description',
+        content: 'Central de erros, registre seu log que iremos solucionar o mais breve possível',
+      });
+      this.metaService.updateTag({ name: 'keywords', content: 'logs,error,trace,warning,info,codenation,center' });
 
       if (environment.services.google.analytics.enabled) {
         gtag('config', environment.services.google.analytics.key, {

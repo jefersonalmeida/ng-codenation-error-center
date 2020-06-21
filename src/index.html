@@ -1,22 +1,49 @@
 <!--
 * Dashboard
 * @version v1.0.0
-* @link https://jeferson.net.br/
+* @link https://codenation-java.jeferson.net.br/
 * Copyright (c) 2020 Jeferson Almeida
 -->
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <base href="./">
+  <base href="/">
   <meta charset="utf-8">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-  <meta content="Dashboard utilizando Angular 9+" name="description">
+  <meta content="Central de erros, registre seu log que iremos solucionar o mais breve possível" name="description">
   <meta content="me@jeferson.net.br" name="author">
-  <meta content="Bootstrap,Admin,Template,Angular,Dashboard,Typescript" name="keyword">
-  <link href="assets/favicon.ico" rel="shortcut icon">
-  <title>Dashboard - Angular</title>
+  <meta content="logs,error,trace,warning,info,codenation,center" name="keyword">
+  <link href="assets/img/brand/sygnet.png" rel="apple-touch-icon" sizes="114x114">
+  <link href="assets/img/brand/sygnet.png" rel="icon" sizes="192x192" type="image/png">
+  <link href="assets/img/brand/sygnet.png" rel="icon" sizes="32x32" type="image/png">
+  <script>
+    if (window.location.hostname !== 'localhost') {
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js',
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-TSBD5GV');
+    }
+  </script>
+
+
+  <title>Dashboard - Central de Erros</title>
 </head>
 <body class="app">
+<app-root></app-root>
+<noscript>Ative o JavaScript para continuar usando este aplicativo.</noscript>
+<noscript>
+  <iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-TSBD5GV"
+          style="display:none;visibility:hidden" width="0"></iframe>
+</noscript>
 </body>
 </html>

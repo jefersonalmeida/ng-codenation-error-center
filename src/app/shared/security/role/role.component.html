@@ -20,7 +20,7 @@
   <div class="card card-accent-primary"></div>
   <div class="row">
     <div class="col-md-12">
-      <div (scrolled)="search(searchQuery?.current_page)" class="table-responsive" infiniteScroll>
+      <div (scrolled)="search(searchQuery?.number)" class="table-responsive" infiniteScroll>
         <app-role-list
           (getSortIcon)="getSortIcon($event)"
           (openDeleteConfirmDialog)="deleteConfirm($event)"

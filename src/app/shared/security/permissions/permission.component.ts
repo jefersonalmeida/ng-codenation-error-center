@@ -17,7 +17,7 @@ import * as fromFeature from './store';
 })
 export class PermissionComponent implements OnInit {
   public searchField: FormControl;
-  public searchQuery: Search = {orderBy: 'name', sortedBy: 'asc'};
+  public searchQuery: Search = { order: 'name', sort: 'asc' };
   public modalRef: BsModalRef;
   public entities$: Observable<Permission[]>;
   public loading$: Observable<boolean>;
@@ -47,10 +47,10 @@ export class PermissionComponent implements OnInit {
   search(page = 0, reset = false) {
     this.searchQuery = {
       search: this.searchField.value,
-      orderBy: this.searchQuery.orderBy,
-      sortedBy: this.searchQuery.sortedBy,
-      current_page: (page + 1),
-      per_page: this.searchQuery.per_page || 20,
+      order: this.searchQuery.order,
+      sort: this.searchQuery.sort,
+      number: (page + 1),
+      size: this.searchQuery.size || 20,
     };
     this.store.dispatch(
       reset
@@ -60,17 +60,17 @@ export class PermissionComponent implements OnInit {
   }
 
   public sorted(orderBy: string) {
-    let sortedBy = (this.searchQuery.sortedBy === 'asc') ? 'desc' : 'asc';
-    sortedBy = this.searchQuery.orderBy !== orderBy ? 'asc' : sortedBy;
-    this.searchQuery = {...this.searchQuery, orderBy, sortedBy};
+    let sortedBy = (this.searchQuery.sort === 'asc') ? 'desc' : 'asc';
+    sortedBy = this.searchQuery.order !== orderBy ? 'asc' : sortedBy;
+    this.searchQuery = { ...this.searchQuery, order: orderBy, sort: sortedBy };
     this.search(0, true);
   }
 
   public getSortIcon(orderBy: string) {
-    if (this.searchQuery.orderBy !== orderBy) {
+    if (this.searchQuery.order !== orderBy) {
       return '';
     } else {
-      return (this.searchQuery.sortedBy === 'asc') ? 'fa fa-arrow-up' : 'fa fa-arrow-down';
+      return (this.searchQuery.sort === 'asc') ? 'fa fa-arrow-up' : 'fa fa-arrow-down';
     }
   }
 

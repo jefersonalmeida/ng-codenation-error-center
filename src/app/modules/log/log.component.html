@@ -1,0 +1,45 @@
+<div class="animated fadeIn mb-4">
+  <div class="row mb-1">
+    <div class="col-md-12"><h5 class="mt-2">Logs</h5></div>
+  </div>
+  <div class="card card-accent-primary"></div>
+  <div class="row mb-1">
+    <div class="form-group has-feedback col-md-3">
+      <ng-select [clearable]="false" [formControl]="searchLevel" [searchable]="false" appearance="outline"
+                 labelForId="level">
+        <ng-option *ngFor="let level of levels" [value]="level.id">
+          <i class="{{level.icon}} mr-2"></i> <strong>{{level.name}}</strong>
+        </ng-option>
+      </ng-select>
+    </div>
+    <div class="form-group has-feedback col-md-6">
+      <input [formControl]="searchField" class="form-control" placeholder="Busque por descrição, origem, log"
+             type="text">
+    </div>
+    <div class="col-md-3">
+      <button (click)="openEntityDialog(null)"
+              *ngIf="acl.isAllowed('permissions-create')"
+              class="btn btn-block btn-success mt-2 mt-md-0"
+              placement="top"
+              tooltip="Registrar novo log"><i class="fa fa-plus"></i> Novo
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div (scrolled)="search(searchQuery?.number+1)" class="table-responsive" infiniteScroll>
+        <app-log-list
+          (openDeleteConfirmDialog)="openDeleteConfirmDialog($event)"
+          (openEntityDialog)="openEntityViewDialog($event)"
+          (sorted)="sorted($event)"
+          [acl]="acl"
+          [entities]="entities$ | async"
+          [searchQuery]="searchQuery">
+        </app-log-list>
+        <app-no-data [entities]="entities$ | async" [loading]="loading$ | async"
+                     [search]="searchQuery.search"></app-no-data>
+        <app-loading [loading]="loading$ | async"></app-loading>
+      </div>
+    </div>
+  </div>
+</div>

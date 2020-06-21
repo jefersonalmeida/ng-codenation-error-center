@@ -6,17 +6,17 @@ import { Search } from '../../interfaces/search.interface';
   selector: 'app-pagination',
   template: `
     <nav>
-      <ul *ngIf="pagination?.total_pages > 1" class="pagination m-0">
+      <ul *ngIf="pagination?.totalPages > 1" class="pagination m-0">
         <!--<li [ngClass]="{disabled:pagination?.page === 1}"><a (click)="setPage(1)">Primeira</a></li>-->
-        <li [ngClass]="{disabled:pagination?.current_page === 1}" class="page-item"><a
-          (click)="setPage(pagination?.current_page - 1)"
+        <li [ngClass]="{disabled:pagination?.number === 1}" class="page-item"><a
+          (click)="setPage(pagination?.number - 1)"
           aria-hidden="true"
           aria-label="Anterior"
           class="page-link">&laquo;</a></li>
-        <li *ngFor="let page of getPages()" [ngClass]="{active:pagination?.current_page === page}" class="page-item"><a
+        <li *ngFor="let page of getPages()" [ngClass]="{active:pagination?.number === page}" class="page-item"><a
           (click)="setPage(page)" class="page-link">{{page}}</a></li>
-        <li [ngClass]="{disabled:pagination?.current_page === pagination?.total_pages}" class="page-item"><a
-          (click)="setPage(pagination?.current_page + 1)"
+        <li [ngClass]="{disabled:pagination?.number === pagination?.totalPages}" class="page-item"><a
+          (click)="setPage(pagination?.number + 1)"
           aria-hidden="true"
           aria-label="Próxima"
           class="page-link">&raquo;</a>
@@ -45,7 +45,7 @@ export class PaginationComponent implements OnInit {
     if (page < 1 || page > this.endPage) {
       return;
     }
-    this.pagination.current_page = page;
+    this.pagination.number = page;
     this.getPager();
     this.changePage.emit(page);
   }
@@ -54,21 +54,21 @@ export class PaginationComponent implements OnInit {
   }
 
   getPager() {
-    if (this.pagination.total_pages <= 10) {
+    if (this.pagination.totalPages <= 10) {
       // less than 10 totalValue pages so show all
       this.startPage = 1;
-      this.endPage = this.pagination.total_pages;
+      this.endPage = this.pagination.totalPages;
     } else {
       // more than 10 totalValue pages so calculate start and end pages
-      if (this.pagination.current_page <= 6) {
+      if (this.pagination.number <= 6) {
         this.startPage = 1;
         this.endPage = 10;
-      } else if (this.pagination.current_page + 4 >= this.pagination.total_pages) {
-        this.startPage = this.pagination.total_pages - 9;
-        this.endPage = this.pagination.total_pages;
+      } else if (this.pagination.number + 4 >= this.pagination.totalPages) {
+        this.startPage = this.pagination.totalPages - 9;
+        this.endPage = this.pagination.totalPages;
       } else {
-        this.startPage = this.pagination.current_page - 5;
-        this.endPage = this.pagination.current_page + 4;
+        this.startPage = this.pagination.number - 5;
+        this.endPage = this.pagination.number + 4;
       }
     }
     // create an array of pages to ng-repeat in the pager control

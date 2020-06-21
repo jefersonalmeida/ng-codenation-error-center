@@ -14,13 +14,16 @@ $color-state-inactive: #dadada;
 .breadcrumb {
   margin-bottom: 1rem;
 }
+
 th.sortable {
   color: #151b1e;
   cursor: pointer;
 }
+
 div.dropdown-menu a.dropdown-item {
   cursor: pointer;
 }
+
 input,
 .form-control {
   border-radius: 0 !important;
@@ -41,6 +44,7 @@ ul.error-messages {
   margin: 0;
   padding: 0;
 }
+
 .ui-message {
   margin: 0;
   display: block;
@@ -102,27 +106,6 @@ form .form-group .ng-invalid:not(.ng-untouched):not(form) {
   padding-left: 30px !important;
 }
 
-.tab-container {
-  & ul.nav-tabs {
-    & .nav-link {
-      padding: 0.5rem 0.3rem;
-    }
-  }
-
-  & .tab-content {
-    & .tab-pane {
-      overflow: hidden;
-    }
-  }
-}
-
-.tab-pdv-movement {
-  & ul.nav-tabs {
-    & .nav-link {
-      padding: 0.5rem 1rem !important;
-    }
-  }
-}
 
 ul.tree, ul.tree ul {
   list-style: none;
@@ -218,15 +201,23 @@ app-dashboard-pdv*/
   background: #fafafa linear-gradient(135deg, #fafafa 22px, rgba(0, 0, 0, .04) 22px, rgba(0, 0, 0, .04) 24px, transparent 24px, transparent 67px, rgba(0, 0, 0, .04) 67px, rgba(0, 0, 0, .04) 69px, transparent 69px) linear-gradient(225deg, #fafafa 22px, rgba(0, 0, 0, .04) 22px, rgba(0, 0, 0, .04) 24px, transparent 24px, transparent 67px, rgba(0, 0, 0, .04) 67px, rgba(0, 0, 0, .04) 69px, transparent 69px) 0 64px;
   background-size: 64px 128px;
 }
+
 .modal-xl {
   width: 95% !important;
   max-width: 95% !important;
 }
+
+.modal-70 {
+  width: 70% !important;
+  max-width: 70% !important;
+}
+
 @media (min-width: 990px) and (max-width: 100px) {
   ul.tree li {
     font-size: 10px;
   }
 }
+
 /*
 @media only screen and (max-width: 800px),
 (min-device-width: 768px) and (max-device-width: 1024px) {

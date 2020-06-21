@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/dashboard';
     this.email = this.activatedRoute.snapshot.params.email;
-
     this.form = this.fb.group({
       email: this.fb.control(this.email ? atob(this.email) : null, [Validators.required, Validators.email]),
       password: this.fb.control(null, [Validators.required, Validators.minLength(6)]),
@@ -37,11 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.pipe(
       select(fromApp.getCurrentUser),
-      map((user: User) => {
-        if (user) {
-          this.router.navigate(['/dashboard']);
-        }
-      }),
+      map((user: User) => user && this.router.navigate(['/dashboard'])),
       takeUntil(this.ngUnsubscribe),
     ).subscribe();
   }
@@ -51,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.store.dispatch(fromApp.Login({payload: this.form.value}));
+    this.store.dispatch(fromApp.Login({ payload: this.form.value }));
   }
 
   public forgot() {
@@ -65,5 +60,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  public loginSocialGoogle() {
+    this.loginSocial('google');
+  }
+
+  public loginSocialFacebook() {
+    this.loginSocial('facebook');
+  }
+
+  private loginSocial(provider: string) {
+    this.store.dispatch(fromApp.LoginSocial({ payload: provider }));
   }
 }

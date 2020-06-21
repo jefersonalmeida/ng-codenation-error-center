@@ -28,10 +28,10 @@ export class RoleService {
     return this.http.get<Role[] | any>(`${API_URL}/roles`, {
       params: new HttpParams()
         .set('search', searchQuery.search)
-        .set('sortedBy', searchQuery.sortedBy)
-        .set('orderBy', searchQuery.orderBy)
-        .set('page', searchQuery.current_page.toString())
-        .set('limit', searchQuery.per_page.toString()),
+        .set('sortedBy', searchQuery.sort)
+        .set('orderBy', searchQuery.order)
+        .set('page', searchQuery.number.toString())
+        .set('limit', searchQuery.size.toString()),
     });
   }
 

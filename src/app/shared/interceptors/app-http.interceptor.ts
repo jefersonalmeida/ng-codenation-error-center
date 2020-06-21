@@ -3,7 +3,6 @@ import { Injectable, Injector } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { isArray, isObject } from '../pipes/utils/utils';
 import { AuthService } from '../security/auth/auth.service';
 
 @Injectable({
@@ -47,7 +46,16 @@ export class AppHttpInterceptor implements HttpInterceptor {
     }
     if (error instanceof HttpErrorResponse) {
       console.log('handleErrorGlobal', error);
-      if (error.status === 400 && error.error && isObject(error.error.message)) {
+
+      if (error.error && error.error.errors && error.error.errors.length) {
+        error.error.errors.map(err => {
+          this.showError(err);
+        });
+      } else {
+        this.showError(error.error.message || this.DEFAULT_MESSAGE);
+      }
+
+      /*if (error.status === 400 && error.error && isObject(error.error.message)) {
         const data = error.error.message;
         Object.keys(data).map(fieldName => {
           if (isArray(data[fieldName])) {
@@ -62,7 +70,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
         this.authService.goToLogin();
       } else {
         this.showError(error.error.message || this.DEFAULT_MESSAGE);
-      }
+      }*/
     }
     return throwError('');
   }

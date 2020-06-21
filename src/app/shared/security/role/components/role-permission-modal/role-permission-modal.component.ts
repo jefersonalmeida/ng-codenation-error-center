@@ -58,10 +58,10 @@ export class RolePermissionModalComponent implements OnInit {
 
     this.searchQuery = {
       search: '',
-      orderBy: 'display_name',
-      sortedBy: 'asc',
-      current_page: 0,
-      per_page: 100,
+      order: 'display_name',
+      sort: 'asc',
+      number: 0,
+      size: 100,
     };
 
     this.permissionsService.index(this.searchQuery).pipe(

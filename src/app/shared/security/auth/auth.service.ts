@@ -16,8 +16,10 @@ import {
   RegisterDTO,
   TokenDTO,
 } from './auth.interface';
+import { ResponseEntity } from '../../interfaces/response.interface';
 
 const API_URL = environment.apiUrl;
+const SOCIAL_REDIRECT = environment.socialRedirect;
 
 @Injectable({
   providedIn: 'root',
@@ -51,20 +53,29 @@ export class AuthService {
   }
 
   public destroyToken(): Observable<any> {
-    return this.httpClient.get<any>(`${API_URL}/auth/logout`).pipe(
+    this.notification.info(`Até mais ${this.user.name}! Esperamos que volte logo :)`);
+    localStorage.clear();
+    return of(true);
+    /*return this.httpClient.get<any>(`${API_URL}/auth/logout`).pipe(
       map((result: any) => {
         this.notification.info(result.message);
         localStorage.clear();
         return result;
       }),
-    );
+    );*/
   }
 
-  public register(entity: RegisterDTO): Observable<any> {
+  public register(entity: RegisterDTO): Observable<ResponseEntity<User>> {
     AnalyticsService.eventEmitter('register', 'engagement', 'Registrar', 1);
     return this.httpClient
-      .post<{ message: string }>(`${API_URL}/auth/register`, entity)
-      .pipe(tap(response => this.notification.success(response.message)));
+      .post<ResponseEntity<User>>(`${API_URL}/auth/register`, entity)
+      .pipe(
+        map((response: ResponseEntity<User>) => {
+            this.notification.success(`Seja bem-vindo(a) ${response.data.name}!`);
+            return response;
+          },
+        ),
+      );
   }
 
   public activate(token: string): Observable<User> {
@@ -77,7 +88,7 @@ export class AuthService {
           this.user = result.user;
           this.notification.success(`${this.user.name}, sua conta foi ativada com sucesso!`);
           return this.user;
-       }),
+        }),
       );
   }
 
@@ -87,10 +98,10 @@ export class AuthService {
       email: credentials.email,
       password: credentials.password,
     };
-    return this.httpClient.post<TokenDTO>(`${API_URL}/auth/login`, body).pipe(
-      map((result: TokenDTO) => {
-        this.accessToken = result.access_token;
-        this.user = result.user;
+    return this.httpClient.post<ResponseEntity<TokenDTO>>(`${API_URL}/auth/login`, body).pipe(
+      map((result: ResponseEntity<TokenDTO>) => {
+        this.accessToken = result.data.token;
+        this.user = result.data.user;
         return this.user;
       }),
     );
@@ -98,11 +109,10 @@ export class AuthService {
 
   public whoami(): Observable<User> {
     if (this.accessToken) {
-      return this.httpClient.get<User>(`${API_URL}/auth/whoami`).pipe(
-        map((user: User) => {
-          this.user = user;
-          // EventEmitterService.get(EventsEnum.userRefresh).emit(auth);
-          return user;
+      return this.httpClient.get<ResponseEntity<User>>(`${API_URL}/auth/whoami`).pipe(
+        map((response: ResponseEntity<User>) => {
+          this.user = response.data;
+          return response.data;
         }),
       );
     }
@@ -134,4 +144,20 @@ export class AuthService {
     this.router.navigate([`/auth/login/${email}`]);
   }
 
+  public loginSocial(provider: string = 'google') {
+    window.location.href = `${API_URL}/auth/login/${provider}?redirect=${btoa(SOCIAL_REDIRECT)}`;
+  }
+
+  public loginSocialToken(token: string) {
+    return this.httpClient
+      .get<TokenDTO>(`${API_URL}/auth/login/social/${token}`)
+      .pipe(
+        map((result: TokenDTO) => {
+          this.accessToken = result.access_token;
+          this.user = result.user;
+          this.notification.success(`Olá ${this.user.name}`);
+          return this.user;
+        }),
+      );
+  }
 }

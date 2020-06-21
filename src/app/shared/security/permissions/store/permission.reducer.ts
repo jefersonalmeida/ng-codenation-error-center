@@ -8,10 +8,10 @@ const initialState: fromFeature.PermissionState = {
   loading: false,
   query: {
     search: '',
-    orderBy: 'name',
-    sortedBy: 'asc',
-    current_page: 1,
-    per_page: 20,
+    order: 'name',
+    sort: 'asc',
+    number: 1,
+    size: 20,
   },
 };
 

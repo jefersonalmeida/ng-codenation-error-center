@@ -1,0 +1,40 @@
+<table *ngIf="entities.length" class="table bg-white table-hover table-outline mb-0">
+  <thead>
+  <tr>
+    <th (click)="eventSorted('level')" class="sortable">
+      Nível<i class="ml-1 {{getSortIcon('level')}}"></i>
+    </th>
+    <th (click)="eventSorted('description')" class="sortable">
+      Descrição<i class="ml-1 {{getSortIcon('description')}}"></i>
+    </th>
+    <th (click)="eventSorted('origin')" class="sortable">
+      Origem<i class="ml-1 {{getSortIcon('origin')}}"></i>
+    </th>
+    <th (click)="eventSorted('date')" class="sortable">
+      Data<i class="ml-1 {{getSortIcon('date')}}"></i>
+    </th>
+    <th class="td-actions"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let entity of entities">
+    <td data-title="Nível">
+      <strong>
+        <i class="mr-2 {{getLevel(entity?.level)?.icon}}"></i>
+        {{getLevel(entity?.level)?.name}}</strong>
+    </td>
+    <td data-title="Descrição">{{entity?.description}}</td>
+    <td data-title="Origem">{{entity?.origin}}</td>
+    <td data-title="Data">{{entity?.date | date :'short'}}</td>
+    <td class="td-actions" data-title="Ações">
+      <div class="btn-group">
+        <button (click)="eventOpenEntityDialog(entity)"
+                class="btn btn-primary"
+                placement="top"
+                tooltip="Visualizar"><i class="fa fa-eye"></i>
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

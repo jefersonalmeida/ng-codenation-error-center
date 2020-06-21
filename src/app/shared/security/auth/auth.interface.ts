@@ -1,3 +1,5 @@
+import { User } from '../../interfaces/user.interface';
+
 export interface LoginDTO {
   email: string;
   password: string;
@@ -27,7 +29,8 @@ export interface ForgotPasswordResetDTO {
 }
 
 export interface TokenDTO {
+  token: string;
   access_token: string;
-  user: any;
+  user: User;
   refresh_token?: string;
 }

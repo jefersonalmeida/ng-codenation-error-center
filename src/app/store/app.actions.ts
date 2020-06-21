@@ -9,6 +9,9 @@ import {
 } from '../shared/security/auth/auth.interface';
 
 export const Login = createAction('[@auth] Login', props<{ payload: LoginDTO }>());
+export const LoginSocial = createAction('[@auth] LoginSocial', props<{ payload: string }>());
+export const LoginSocialToken = createAction('[@auth] LoginSocialToken', props<{ payload: string }>());
+export const LoginSocialFailure = createAction('[@auth] LoginSocialFailure');
 
 export const Register = createAction('[@auth] Register', props<{ payload: RegisterDTO }>());
 export const Activate = createAction('[@auth] Activate', props<{ payload: string }>());

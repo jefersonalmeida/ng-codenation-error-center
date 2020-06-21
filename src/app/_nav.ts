@@ -7,6 +7,11 @@ export const navItems: INavData[] = [
     icon: 'fa fa-dashboard',
   },
   {
+    name: 'Logs',
+    url: '/logs',
+    icon: 'fa fa-bug',
+  },
+  /*{
     name: 'Segurança',
     url: '/security',
     icon: 'fa fa-lock',
@@ -27,23 +32,9 @@ export const navItems: INavData[] = [
         icon: 'fa fa-shield',
       },
     ],
-  },
+  },*/
   {
     divider: true,
-  },
-  {
-    title: true,
-    name: 'Extras',
-  },
-  {
-    name: 'Módulo X',
-    url: '/dashboard',
-    icon: 'icon-ban',
-    badge: {
-      variant: 'secondary',
-      text: 'NOVO',
-    },
-    attributes: {disabled: true},
   },
   {
     name: '+55-65-99969-5873',
