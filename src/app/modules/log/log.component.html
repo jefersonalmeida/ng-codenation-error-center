@@ -34,11 +34,9 @@
           (sorted)="sorted($event)"
           [acl]="acl"
           [entities]="entities$ | async"
+          [loading]="loading$ | async"
           [searchQuery]="searchQuery">
         </app-log-list>
-        <app-no-data [entities]="entities$ | async" [loading]="loading$ | async"
-                     [search]="searchQuery.search"></app-no-data>
-        <app-loading [loading]="loading$ | async"></app-loading>
       </div>
     </div>
   </div>

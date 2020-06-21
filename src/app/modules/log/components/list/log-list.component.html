@@ -1,4 +1,4 @@
-<table *ngIf="entities.length" class="table bg-white table-hover table-outline mb-0">
+<table class="table bg-white table-hover table-outline mb-0">
   <thead>
   <tr>
     <th (click)="eventSorted('level')" class="sortable">
@@ -16,7 +16,7 @@
     <th class="td-actions"></th>
   </tr>
   </thead>
-  <tbody>
+  <tbody *ngIf="entities.length">
   <tr *ngFor="let entity of entities">
     <td data-title="Nível">
       <strong>
@@ -38,3 +38,5 @@
   </tr>
   </tbody>
 </table>
+<app-no-data [entities]="entities" [loading]="loading" [search]="searchQuery.search"></app-no-data>
+<app-loading [loading]="loading"></app-loading>

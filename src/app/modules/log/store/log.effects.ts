@@ -9,6 +9,7 @@ import * as featureActions from './log.actions';
 import { LogViewModalComponent } from '../components/modal/log-view-modal.component';
 import { selectEntity } from './log.selector';
 import { ModalService } from '../../../shared/services/modal.service';
+import { AnalyticsService } from '../../../shared/services/analytics.service';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,7 @@ export class LogEffects {
 
   loadingEntitySuccess$ = createEffect(() => this.actions$.pipe(
     ofType(featureActions.LoadEntitySuccess),
+    tap(_ => AnalyticsService.eventEmitter('view_log', 'engagement', 'View Log', 1)),
     withLatestFrom(this.store.pipe(select(selectEntity))),
     tap(([action, entity]) => {
       this.modalService.open(LogViewModalComponent, {
@@ -45,6 +47,7 @@ export class LogEffects {
 
   createEntity$ = createEffect(() => this.actions$.pipe(
     ofType(featureActions.CreateEntity),
+    tap(_ => AnalyticsService.eventEmitter('register_log', 'engagement', 'Register Log', 1)),
     mergeMap(action => this.service.store(action.entity).pipe(
       map(result => featureActions.CreateEntitySuccess({ result })),
     )),

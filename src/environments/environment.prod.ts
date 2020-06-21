@@ -1,7 +1,7 @@
 export const environment = {
-  production: false,
-  socialRedirect: 'http://localhost:4200/auth/social',
-  apiUrl: 'http://localhost:8080',
+  production: true,
+  socialRedirect: 'https://codenation-java.jeferson.net.br/auth/social',
+  apiUrl: 'https://codenation-error-center.herokuapp.com',
   levels: [
     { id: '', name: 'Todos', icon: 'fa fa-globe' },
     { id: 'ERROR', name: 'Erro', icon: 'fa fa-exclamation-circle text-danger' },
@@ -10,7 +10,7 @@ export const environment = {
   ],
   services: {
     google: {
-      analytics: { enabled: false, key: 'UA-122656524-6' },
+      analytics: { enabled: true, key: 'UA-122656524-5' },
     },
   },
 };

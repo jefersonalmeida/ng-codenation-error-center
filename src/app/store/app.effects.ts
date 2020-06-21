@@ -15,6 +15,7 @@ import {
 } from '../shared/security/auth/auth.interface';
 import { AuthService } from '../shared/security/auth/auth.service';
 import * as authActions from './app.actions';
+import { AnalyticsService } from '../shared/services/analytics.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,7 @@ export class AppEffects {
   login$ = createEffect(() => this.actions$
     .pipe(
       ofType(authActions.Login),
+      tap(_ => AnalyticsService.eventEmitter('login', 'engagement', 'Login', 1)),
       map(action => action.payload),
       exhaustMap((action: LoginDTO) => this.authService.login(action)
         .pipe(
@@ -65,6 +67,7 @@ export class AppEffects {
   register$ = createEffect(() => this.actions$
     .pipe(
       ofType(authActions.Register),
+      tap(_ => AnalyticsService.eventEmitter('register', 'engagement', 'Register', 1)),
       map(action => action.payload),
       exhaustMap((action: RegisterDTO) => this.authService.register(action)
         .pipe(
@@ -146,6 +149,7 @@ export class AppEffects {
   logoutConfirmation$ = createEffect(() => this.actions$
     .pipe(
       ofType(authActions.LogoutConfirmation),
+      tap(_ => AnalyticsService.eventEmitter('logout_confirmation', 'engagement', 'Logout', 1)),
       mergeMap(() => {
         // let modalRef: BsModalRef;
         const modalRef = this.modalService.show(ModalConfirmComponent, {
@@ -168,6 +172,7 @@ export class AppEffects {
   logout$ = createEffect(() => this.actions$
     .pipe(
       ofType(authActions.Logout),
+      tap(_ => AnalyticsService.eventEmitter('logout_confirmed', 'engagement', 'Logout', 1)),
       mergeMap(() => this.authService.destroyToken()
         .pipe(
           map(result => {

@@ -11,6 +11,7 @@ import { environment } from '../../../../../environments/environment';
 export class LogListComponent {
   @Input() acl: AclService;
   @Input() entities: Log[];
+  @Input() loading: boolean = false;
   @Input() searchQuery: Search;
   public levels = environment.levels;
 
