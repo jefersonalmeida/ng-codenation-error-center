@@ -73,7 +73,7 @@ const actionReducer = createReducer(
 
   on(featureActions.CreateEntitySuccess, (state, action): fromFeature.LogState => ({
     ...state,
-    entities: [...state.entities, action.result.data],
+    entities: state.entities,
     entity: action.result.data,
     loading: false,
   })),

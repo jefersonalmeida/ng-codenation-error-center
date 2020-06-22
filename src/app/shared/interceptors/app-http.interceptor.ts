@@ -55,6 +55,11 @@ export class AppHttpInterceptor implements HttpInterceptor {
         this.showError(error.error.message || this.DEFAULT_MESSAGE);
       }
 
+      if (error.error && error.error.error === 'Unauthorized') {
+        this.authService.logout();
+        this.authService.goToLogin();
+      }
+
       /*if (error.status === 400 && error.error && isObject(error.error.message)) {
         const data = error.error.message;
         Object.keys(data).map(fieldName => {

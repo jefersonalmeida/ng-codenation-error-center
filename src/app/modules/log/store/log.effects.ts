@@ -7,7 +7,7 @@ import { LogService } from '../log.service';
 import { LogState } from './index';
 import * as featureActions from './log.actions';
 import { LogViewModalComponent } from '../components/modal/log-view-modal.component';
-import { selectEntity } from './log.selector';
+import { selectEntity, selectQuery } from './log.selector';
 import { ModalService } from '../../../shared/services/modal.service';
 import { AnalyticsService } from '../../../shared/services/analytics.service';
 
@@ -47,9 +47,12 @@ export class LogEffects {
 
   createEntity$ = createEffect(() => this.actions$.pipe(
     ofType(featureActions.CreateEntity),
+    withLatestFrom(this.store.pipe(select(selectQuery))),
     tap(_ => AnalyticsService.eventEmitter('register_log', 'engagement', 'Register Log', 1)),
-    mergeMap(action => this.service.store(action.entity).pipe(
-      map(result => featureActions.CreateEntitySuccess({ result })),
+    mergeMap(([action, query]) => this.service.store(action.entity).pipe(
+      map(result => {
+        return featureActions.LoadEntitiesFilter({ query: query });
+      }),
     )),
   ));
 

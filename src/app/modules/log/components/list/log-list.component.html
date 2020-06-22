@@ -10,6 +10,9 @@
     <th (click)="eventSorted('origin')" class="sortable">
       Origem<i class="ml-1 {{getSortIcon('origin')}}"></i>
     </th>
+    <th (click)="eventSorted('quantity')" class="sortable">
+      Qtd<i class="ml-1 {{getSortIcon('quantity')}}"></i>
+    </th>
     <th (click)="eventSorted('date')" class="sortable">
       Data<i class="ml-1 {{getSortIcon('date')}}"></i>
     </th>
@@ -25,6 +28,7 @@
     </td>
     <td data-title="Descrição">{{entity?.description}}</td>
     <td data-title="Origem">{{entity?.origin}}</td>
+    <td data-title="Origem">{{entity?.quantity}}</td>
     <td data-title="Data">{{entity?.date | date :'short'}}</td>
     <td class="td-actions" data-title="Ações">
       <div class="btn-group">
