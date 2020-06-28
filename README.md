@@ -1,4 +1,4 @@
-# Codenation - Central de Erros
+# Codenation - Central de Erros - Frontend
 Frontend do Projeto prático do AceleraDev Java Online da CodeNation
 
 ## Author
@@ -25,6 +25,9 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
 - [Repositório - Frontend](https://github.com/jefersonalmeida/ng-codenation-error-center)
 - [Vídeo 1 - Apresentação do projeto prático](https://www.youtube.com/watch?v=Ir1i61zt1eY)
 - [Vídeo 2 - Apresentação do projeto prático](https://www.youtube.com/watch?v=N8adRfDmHuM)
+
+### Dados para login
+**email:** *codenation@jeferson.net.br* - **password:** *codenation*
 
 ### Tecnologia
 - Java *(8)*
