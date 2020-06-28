@@ -24,7 +24,7 @@ export class LogService {
   ) {
   }
 
-  index(searchQuery: Search): Observable<ResponseEntity<ResponsePageable<Log>>> {
+  index(searchQuery: Search): Observable<ResponsePageable<Log>> {
     let params = new HttpParams();
     if (searchQuery.search) {
       params = params.append('search', searchQuery.search);
@@ -45,7 +45,7 @@ export class LogService {
       params = params.append('size', searchQuery.size.toString());
     }
 
-    return this.http.get<ResponseEntity<ResponsePageable<Log>>>(`${RESOURCE_URL}`, { params });
+    return this.http.get<ResponsePageable<Log>>(`${RESOURCE_URL}`, { params });
   }
 
   find(key: number | string): Observable<ResponseEntity<Log>> {

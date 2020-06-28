@@ -47,12 +47,12 @@ export class AppHttpInterceptor implements HttpInterceptor {
     if (error instanceof HttpErrorResponse) {
       console.log('handleErrorGlobal', error);
 
-      if (error.error && error.error.errors && error.error.errors.length) {
-        error.error.errors.map(err => {
-          this.showError(err);
+      if (error.error && error.error.error && error.error.error.fields.length) {
+        error.error.error.fields.map(err => {
+          this.showError(`${err.name} - ${err.message}`);
         });
       } else {
-        this.showError(error.error.message || this.DEFAULT_MESSAGE);
+        this.showError(error.error.error.message || this.DEFAULT_MESSAGE);
       }
 
       if (error.error && error.error.error === 'Unauthorized') {

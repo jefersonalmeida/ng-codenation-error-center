@@ -261,7 +261,7 @@ app-dashboard-pdv*/
       border-right: 1px dashed !important;
     }
     & td:before {
-      content: attr(data-title);
+      data: attr(data-title);
     }
   }
 }

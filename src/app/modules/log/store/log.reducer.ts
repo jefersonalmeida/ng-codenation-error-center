@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as fromFeature from '.';
 import * as featureActions from './log.actions';
-import { ResponseEntity, ResponsePageable } from '../../../shared/interfaces/response.interface';
+import { ResponsePageable } from '../../../shared/interfaces/response.interface';
 import { Log } from '../log.interface';
 import { TypedAction } from '@ngrx/store/src/models';
 
@@ -20,8 +20,8 @@ const initialState: fromFeature.LogState = {
 
 function getQuery<S>(
   state: fromFeature.LogState,
-  action: { result: ResponseEntity<ResponsePageable<Log>> } & TypedAction<string> & { type: string }) {
-  const { number, size, totalElements, totalPages } = action.result.data;
+  action: { result: ResponsePageable<Log> } & TypedAction<string> & { type: string }) {
+  const { number, size, totalElements, totalPages } = action.result;
   return { ...state.query, number, size, totalElements, totalPages };
 }
 
@@ -48,8 +48,8 @@ const actionReducer = createReducer(
     entity: null,
     loading: false,
     query: getQuery(state, action),
-    entities: action.result.data.content.length
-      ? state.entities.concat(action.result.data.content)
+    entities: action.result.data.length
+      ? state.entities.concat(action.result.data)
       : state.entities,
   })),
 

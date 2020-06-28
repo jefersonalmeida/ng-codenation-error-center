@@ -5,7 +5,7 @@ import { ResponseEntity, ResponsePageable } from '../../../shared/interfaces/res
 
 export const LoadEntities = createAction('[@log] LoadEntities', props<{ query: Search }>());
 export const LoadEntitiesFilter = createAction('[@log] LoadEntitiesFilter', props<{ query: Search }>());
-export const LoadEntitiesSuccess = createAction('[@log] LoadEntitiesSuccess', props<{ result: ResponseEntity<ResponsePageable<Log>> }>());
+export const LoadEntitiesSuccess = createAction('[@log] LoadEntitiesSuccess', props<{ result: ResponsePageable<Log> }>());
 
 export const LoadEntity = createAction('[@log] LoadEntity', props<{ id: string }>());
 export const LoadEntitySuccess = createAction('[@log] LoadEntitySuccess', props<{ result?: ResponseEntity<Log> }>());
